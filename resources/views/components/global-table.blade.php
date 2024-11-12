@@ -100,7 +100,7 @@
                     </td>
                     <td scope="row" class="!p-1" width="10%">
                         <div>
-                            <a href="javascript:void(0);" class="ti-btn ti-btn-sm ti-btn-soft-info !border !border-info/20" onclick="confirmDelete(event,{{$item->id}})">
+                            <a href="javascript:void(0);" class="ti-btn ti-btn-sm ti-btn-soft-info !border !border-info/20" onclick="ShowModal(event,{{$item->id}})">
                                 <i class="ti ti-pencil"></i>
                             </a>
                            <!-- Delete button that triggers confirmation -->
