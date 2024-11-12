@@ -17,7 +17,7 @@ class CommonController extends Controller
     // State Master
     public function state_index(){
         $states = $this->commonRepository->getAllState(10);
-        $common = CustomHelper::setHeadersAndTitle('Master Management', 'States');
+        $common = CustomHelper::setHeadersAndTitle('Master Management', 'States(Destinations)');
         return view('admin.state.index', array_merge(compact('states'), $common));
     }
 
@@ -43,4 +43,8 @@ class CommonController extends Controller
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
+
+
+
+
 }

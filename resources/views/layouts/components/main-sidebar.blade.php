@@ -80,10 +80,10 @@
 										<a href="{{route('admin.leads.index')}}" class="side-menu__item">Hotels</a>
 									</li>
 									<li class="slide">
-										<a href="javascript:void(0);" class="side-menu__item">Hotel Divisions</a>
+										<a href="{{route('admin.state.index')}}" class="side-menu__item">Hotel Destinations</a>
 									</li>
 									<li class="slide">
-										<a href="javascript:void(0);" class="side-menu__item">Hotel Destinations</a>
+										<a href="javascript:void(0);" class="side-menu__item">Hotel Divisions</a>
 									</li>
 									<li class="slide">
 										<a href="javascript:void(0);" class="side-menu__item">Hotel Categories</a>

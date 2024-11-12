@@ -42,7 +42,7 @@
     <div class="xl:col-span-4 col-span-12">
         <div class="box custom-box">
             <div class="box-header">
-                <h6 class="uppercase">New State</h6>
+                <h6 class="uppercase">New {{$childHeader}}</h6>
             </div>
             <div class="box-body">
                 <form action="{{route('admin.state.store')}}" method="post">
