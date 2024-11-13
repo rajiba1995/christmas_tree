@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\City;
 use App\Models\State;
 use App\Models\Division;
+use App\Models\Category;
 use Illuminate\Support\Facades\DB;
 
 class CommonRepository
@@ -27,7 +28,7 @@ class CommonRepository
         return $division;
     }
 
-    
+
     public function deleteCity($id){
         $city = City::findOrFail($id);
         $city->delete();
@@ -75,4 +76,31 @@ class CommonRepository
         $division->delete();
         return $division;
     }
+
+
+     // Category
+     public function getAllCategory(int $perPage = 15)
+     {
+         return Category::orderBy('name', 'ASC')->paginate($perPage);
+     }
+     public function getAllActiveCategory()
+     {
+         return Category::where('status', 1)->get();
+     }
+
+     public function createCategory(array $data){
+        $category = new Category;
+        $category->name = ucwords($data['name']);
+        $category->save();
+        return $category;
+    }
+
+    public function deleteCategory($id){
+        $category = Category::findOrFail($id);
+        $category->delete();
+        return $category;
+    }
+
+   
+ 
 }

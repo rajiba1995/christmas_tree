@@ -77,5 +77,36 @@ class CommonController extends Controller
         }
     }
 
+     // Category Master
+     public function category_index(){
+        $categories = $this->commonRepository->getAllCategory(10);
+        $common = CustomHelper::setHeadersAndTitle('Hotel Management', 'Category');
+        return view('admin.category.index', array_merge(compact('categories'), $common));
+    }
+
+    public function category_store(Request $request){
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255|unique:categories,name',
+        ], [
+            'name.required' => 'Please enter category name.',
+            'name.unique' => 'This category name already exists.',
+        ]);
+        try {
+            $this->commonRepository->createCategory($validatedData);
+            return redirect()->back()->with('success', 'Category created successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+
+    public function category_destroy($id){
+        try {
+            $this->commonRepository->deleteCategory($id);
+            return redirect()->route('admin.category.index')->with('success', 'Category deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+
 
 }
