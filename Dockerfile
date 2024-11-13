@@ -13,6 +13,12 @@ RUN apt-get update && apt-get install -y \
     unzip \
     libonig-dev \
     libxml2-dev \
+    gnupg2 \
+    ca-certificates \
+    lsb-release \
+    && curl -sL https://deb.nodesource.com/setup_18.x | bash - \
+    && apt-get install -y nodejs \
+    && npm install -g npm  # Ensure npm is installed globally
     && docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd
 
 # Install Composer (PHP dependency manager)
@@ -31,6 +37,9 @@ RUN composer install --optimize-autoloader --no-dev
 
 # Generate Laravel application key
 RUN php artisan key:generate
+
+# Install Node dependencies
+RUN npm install
 
 # Expose port 9000 for PHP-FPM
 EXPOSE 9000

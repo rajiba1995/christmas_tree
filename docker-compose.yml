@@ -6,8 +6,6 @@ services:
     image: christmas-tree
     container_name: christmas-tree
     working_dir: /var/www
-    ports:
-      - "9000:9000"
     volumes:
       - .:/var/www
     networks:
@@ -38,15 +36,14 @@ services:
     container_name: nginx
     restart: always
     ports:
-      - "80:80"
+      - "8000:80"  # Map NGINX to port 8000 on host
     volumes:
       - .:/var/www
-      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d
     networks:
       - app-network
     depends_on:
       - app
-
 networks:
   app-network:
     driver: bridge
