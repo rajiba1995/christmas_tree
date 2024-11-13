@@ -55,6 +55,16 @@ Route::middleware('auth')->group(function () {
             Route::post('/update', [CommonController::class,'state_update'])->name('admin.state.update');
             Route::get('/destroy/{id}', [CommonController::class,'state_destroy'])->name('admin.state.destroy');
         });
+
+        // Division Master
+        Route::prefix('division')->group(function(){
+            Route::get('/', [CommonController::class,'division_index'])->name('admin.division.index');
+            Route::post('/store', [CommonController::class,'division_store'])->name('admin.division.store');
+            Route::get('/edit', [CommonController::class,'division_edit'])->name('admin.division.edit');
+            Route::post('/update', [CommonController::class,'division_update'])->name('admin.division.update');
+            Route::get('/destroy/{id}', [CommonController::class,'division_destroy'])->name('admin.division.destroy');
+        });
+        
     });
    
     

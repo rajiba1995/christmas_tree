@@ -109,6 +109,27 @@
                             </button>
                         </div>
                     </td>
+                @elseif($dataType=='division')
+                    <td scope="row" class="!p-1">{{$item->name}}</td>
+                    <td scope="row" class="!p-1">{{$item->DestinationData?$item->DestinationData->name:""}}</td>
+                    <td scope="row" class="!p-1">
+                        <livewire:master-status-toggle 
+                            modelName="City" 
+                            :item="$item" 
+                            wire:key="status-toggle-{{ $item->id }}" 
+                        />
+                    </td>
+                    <td scope="row" class="!p-1" width="10%">
+                        <div>
+                            <a href="javascript:void(0);" class="ti-btn ti-btn-sm ti-btn-soft-info !border !border-info/20" onclick="ShowModal(event,{{$item->id}})">
+                                <i class="ti ti-pencil"></i>
+                            </a>
+                           <!-- Delete button that triggers confirmation -->
+                           <button type="button" onclick="confirmDelete(event,{{$item->id}})" class="ti-btn ti-btn-sm ti-btn-soft-danger !border !border-danger/20">
+                                <i class="ti ti-trash"></i>
+                            </button>
+                        </div>
+                    </td>
                 @else
                    
                 @endif

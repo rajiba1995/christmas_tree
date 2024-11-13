@@ -35,9 +35,9 @@
 									<i class="fe fe-chevron-right side-menu__angle"></i>
 								</a>
 								<ul class="slide-menu child1">
-									<li class="slide">
+									<!-- <li class="slide">
 										<a href="{{route('admin.state.index')}}" class="side-menu__item">States</a>
-									</li>
+									</li> -->
 									<li class="slide">
 										<a href="{{url('index')}}" class="side-menu__item">Cities</a>
 									</li>
@@ -83,7 +83,7 @@
 										<a href="{{route('admin.state.index')}}" class="side-menu__item">Hotel Destinations</a>
 									</li>
 									<li class="slide">
-										<a href="javascript:void(0);" class="side-menu__item">Hotel Divisions</a>
+										<a href="{{route('admin.division.index')}}" class="side-menu__item">Hotel Divisions</a>
 									</li>
 									<li class="slide">
 										<a href="javascript:void(0);" class="side-menu__item">Hotel Categories</a>

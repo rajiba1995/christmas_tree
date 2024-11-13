@@ -44,7 +44,35 @@ class CommonController extends Controller
         }
     }
 
+    // Division Master
+    public function division_index(){
+        $divisions = $this->commonRepository->getAllCity(10);
+        $common = CustomHelper::setHeadersAndTitle('Hotel Management', 'Division(City)');
+        return view('admin.division.index', array_merge(compact('divisions'), $common));
+    }
 
+    public function division_store(Request $request){
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255|unique:divisions,name',
+        ], [
+            'name.required' => 'Please enter division name.',
+            'name.unique' => 'This division name already exists.',
+        ]);
+        try {
+            $this->commonRepository->createState($validatedData);
+            return redirect()->back()->with('success', 'State created successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+    public function division_destroy($id){
+        try {
+            $this->commonRepository->deleteCity($id);
+            return redirect()->route('admin.division.index')->with('success', 'Division deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
 
 
 }
