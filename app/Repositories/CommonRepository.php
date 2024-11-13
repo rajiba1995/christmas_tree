@@ -18,6 +18,16 @@ class CommonRepository
     {
         return City::where('status', 1)->get();
     }
+
+    public function createCity(array $data){
+        $division = new City;
+        $division->name = ucwords($data['name']);
+        $division->state_id = ucwords($data['state_id']);
+        $division->save();
+        return $division;
+    }
+
+    
     public function deleteCity($id){
         $city = City::findOrFail($id);
         $city->delete();
@@ -59,12 +69,7 @@ class CommonRepository
         return Division::where('status', 1)->get();
     }
 
-    public function createDivision(array $data){
-        $division = new Division;
-        $division->name = ucwords($data['name']);
-        $division->save();
-        return $division;
-    }
+   
     public function deleteDivision($id){
         $division = Division::findOrFail($id);
         $division->delete();

@@ -17,7 +17,7 @@ class CommonController extends Controller
     // State Master
     public function state_index(){
         $states = $this->commonRepository->getAllState(10);
-        $common = CustomHelper::setHeadersAndTitle('Master Management', 'States(Destinations)');
+        $common = CustomHelper::setHeadersAndTitle('Hotel Management', 'Destinations(States)');
         return view('admin.state.index', array_merge(compact('states'), $common));
     }
 
@@ -25,12 +25,12 @@ class CommonController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255|unique:states,name',
         ], [
-            'name.required' => 'Please enter state name.',
-            'name.unique' => 'This state name already exists.',
+            'name.required' => 'Please enter destination name.',
+            'name.unique' => 'This destination name already exists.',
         ]);
         try {
             $this->commonRepository->createState($validatedData);
-            return redirect()->back()->with('success', 'State created successfully.');
+            return redirect()->back()->with('success', 'Destination created successfully.');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
@@ -38,7 +38,7 @@ class CommonController extends Controller
     public function state_destroy($id){
         try {
             $this->commonRepository->deleteState($id);
-            return redirect()->route('admin.state.index')->with('success', 'State deleted successfully.');
+            return redirect()->route('admin.state.index')->with('success', 'Destination deleted successfully.');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
@@ -47,20 +47,23 @@ class CommonController extends Controller
     // Division Master
     public function division_index(){
         $divisions = $this->commonRepository->getAllCity(10);
+        $destinations = $this->commonRepository->getAllState();
         $common = CustomHelper::setHeadersAndTitle('Hotel Management', 'Division(City)');
-        return view('admin.division.index', array_merge(compact('divisions'), $common));
+        return view('admin.division.index', array_merge(compact('divisions','destinations'), $common));
     }
 
     public function division_store(Request $request){
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255|unique:divisions,name',
+            'name' => 'required|string|max:255|unique:cities,name',
+            'state_id' => 'required',
         ], [
             'name.required' => 'Please enter division name.',
+            'state_id.required' => 'Please enter destination name.',
             'name.unique' => 'This division name already exists.',
         ]);
         try {
-            $this->commonRepository->createState($validatedData);
-            return redirect()->back()->with('success', 'State created successfully.');
+            $this->commonRepository->createCity($validatedData);
+            return redirect()->back()->with('success', 'Division created successfully.');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }

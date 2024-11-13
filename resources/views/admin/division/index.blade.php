@@ -42,26 +42,39 @@
     <div class="xl:col-span-4 col-span-12">
         <div class="box custom-box">
             <div class="box-header">
-                <h6 class="uppercase">New Division</h6>
+                <h6 class="uppercase">{{$childHeader}}</h6>
             </div>
             <div class="box-body">
                 <form action="{{route('admin.division.store')}}" method="post">
                     @csrf
                     <div class="xl:col-span-4 lf:col-span-6 md:col-span-6 sm:col-span-12 col-span-12">
-                        <x-form-field 
-                            type="text" 
-                            name="name" 
-                            label="Name" 
-                            :options="[]"
-                            :value="old('name')"
-                            />
-                        @error('name')
-                            <span class="text-red-500 text-sm">{{ $message }}</span>
-                        @enderror
-                        <div class="flex justify-end">
-                            <x-form-submit-button text="Submit" class="ti-btn ti-btn-primary-full !py-1 !px-2 ti-btn-wave me-[0.375rem]" />
-                        </div>
-                    </div>
+                    <x-form-field 
+                        type="text" 
+                        name="name" 
+                        label="Name" 
+                        :options="[]" 
+                        :value="old('name')" 
+                    />
+                    @error('name')
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                    @enderror
+
+                    <!-- Destination Dropdown -->
+                    <x-form-field 
+                        type="select" 
+                        name="state_id" 
+                        label="Destination" 
+                        :options="$destinations->pluck('name', 'id')" 
+                        :value="old('state_id')" 
+                    />
+    @error('destination_id')
+        <span class="text-red-500 text-sm">{{ $message }}</span>
+    @enderror
+
+    <div class="flex justify-end">
+        <x-form-submit-button text="Submit" class="ti-btn ti-btn-primary-full !py-1 !px-2 ti-btn-wave me-[0.375rem]" />
+    </div>
+</div>
                 </form>
             </div>
         </div>
