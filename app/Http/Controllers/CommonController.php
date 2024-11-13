@@ -108,5 +108,10 @@ class CommonController extends Controller
         }
     }
 
-
+        // Amenity Master
+        public function amenity_index(){
+            $amenities = $this->commonRepository->getAllAmenity(10);
+            $common = CustomHelper::setHeadersAndTitle('Hotel Management', 'Amenity');
+            return view('admin.amenity.index', array_merge(compact('amenities'), $common));
+        }
 }
