@@ -15,11 +15,11 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     gnupg2 \
     ca-certificates \
-    lsb-release \
-    && curl -sL https://deb.nodesource.com/setup_18.x | bash - \
-    && apt-get install -y nodejs \
-    && npm install -g npm  # Ensure npm is installed globally
-    && docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd
+    lsb-release && \
+    curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
+    apt-get install -y nodejs && \
+    npm install -g npm && \
+    docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd
 
 # Install Composer (PHP dependency manager)
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
@@ -28,9 +28,9 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 COPY . .
 
 # Set permissions for Laravel storage and cache directories
-RUN chown -R www-data:www-data /var/www \
-    && chmod -R 775 /var/www/storage \
-    && chmod -R 775 /var/www/bootstrap/cache
+RUN chown -R www-data:www-data /var/www && \
+    chmod -R 775 /var/www/storage && \
+    chmod -R 775 /var/www/bootstrap/cache
 
 # Install Composer dependencies
 RUN composer install --optimize-autoloader --no-dev

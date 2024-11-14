@@ -5,6 +5,7 @@ import * as packages from './package.json';
 import fsExtra from 'fs-extra'; // Import fs-extra as a default import
 import { join } from 'path';
 
+
 export default defineConfig({
     plugins: [
         laravel({

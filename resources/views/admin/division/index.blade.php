@@ -18,7 +18,7 @@
         </nav>
     </div>
     {{-- <div class="ti-btn-list">
-        <a href="{{route('admin.state.index')}}" class="ti-btn ti-btn-danger-full !py-1 !px-2 ti-btn-wave  me-[0.375rem]"><i class="fa-solid fa-caret-left"></i>Back</a>
+        <a href="{{route('admin.division.index')}}" class="ti-btn ti-btn-danger-full !py-1 !px-2 ti-btn-wave  me-[0.375rem]"><i class="fa-solid fa-caret-left"></i>Back</a>
     </div> --}}
 </div>
     <!-- Start:: row-10 -->
@@ -29,12 +29,12 @@
                 
                 <div class="table-responsive">
                     <x-global-table 
-                        :items="$states" 
-                        :fields="['state_name', 'status']" 
-                        dataType="states" 
+                        :items="$divisions" 
+                        :fields="['division','Destination', 'status']" 
+                        dataType="division" 
                         :extra="[]"
                     />
-                    {{ $states->links() }}
+                    {{ $divisions->links() }}
                 </div>
             </div>
         </div>
@@ -42,10 +42,10 @@
     <div class="xl:col-span-4 col-span-12">
         <div class="box custom-box">
             <div class="box-header">
-                <h6 class="uppercase">New {{$childHeader}}</h6>
+                <h6 class="uppercase">New Division</h6>
             </div>
             <div class="box-body">
-                <form action="{{route('admin.state.store')}}" method="post">
+                <form action="{{route('admin.division.store')}}" method="post">
                     @csrf
                     <div class="xl:col-span-4 lf:col-span-6 md:col-span-6 sm:col-span-12 col-span-12">
                         <x-form-field 
@@ -85,7 +85,7 @@
             cancelButtonText: 'No, cancel!',
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = `/admin/state/destroy/${id}`;
+                window.location.href = `/admin/division/destroy/${id}`;
             } else {
                 Swal.fire(
                     'Cancelled',

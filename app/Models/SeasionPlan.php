@@ -4,21 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-
-class City extends Model
+class SeasionPlan extends Model
 {
     use HasFactory,SoftDeletes;
-    protected $table = "cities";
+    protected $table = 'seasion_plans';
     protected $fillable = [
         'id',
-        'name',
+        'title',
         'status',
     ];
-    public function DestinationData(): BelongsTo
-    {
-        return $this->belongsTo(State::class, 'state_id', 'id');
-    }
 }

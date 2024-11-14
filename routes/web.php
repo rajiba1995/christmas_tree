@@ -18,7 +18,7 @@ use App\Http\Controllers\UtilitiesController;
 
 // New Code
 use App\Http\Controllers\Auth\RegisteredUserController;
-use App\Http\Controllers\{LeadManagementController,CommonController};
+use App\Http\Controllers\{LeadManagementController,CommonController,HotelManagementController};
 
 Route::get('/', function () {
     return view('welcome');
@@ -37,7 +37,6 @@ Route::middleware('auth')->group(function () {
 
 
     Route::prefix('admin')->group(function(){
-        
          // Lead Management
         Route::prefix('leads')->group(function(){
             Route::get('/', [LeadManagementController::class, 'index'])->name('admin.leads.index');
@@ -55,6 +54,24 @@ Route::middleware('auth')->group(function () {
             Route::post('/update', [CommonController::class,'state_update'])->name('admin.state.update');
             Route::get('/destroy/{id}', [CommonController::class,'state_destroy'])->name('admin.state.destroy');
         });
+
+        // Division Master
+        Route::prefix('division')->group(function(){
+            Route::get('/', [CommonController::class,'division_index'])->name('admin.division.index');
+            Route::post('/store', [CommonController::class,'division_store'])->name('admin.division.store');
+            Route::get('/edit', [CommonController::class,'division_edit'])->name('admin.division.edit');
+            Route::post('/update', [CommonController::class,'division_update'])->name('admin.division.update');
+            Route::get('/destroy/{id}', [CommonController::class,'division_destroy'])->name('admin.division.destroy');
+        });
+        // Hotel Seasion Plan  Master
+        Route::prefix('hotel-seasion-plan')->group(function(){
+            Route::get('/', [HotelManagementController::class,'hotel_seasion_plan'])->name('admin.hotel_seasion_plan');
+            Route::post('/store', [HotelManagementController::class,'hotel_seasion_plan_store'])->name('admin.hotel_seasion_plan_store');
+            // Route::get('/edit', [HotelManagementController::class,'division_edit'])->name('admin.division.edit');
+            // Route::post('/update', [HotelManagementController::class,'division_update'])->name('admin.division.update');
+            // Route::get('/destroy/{id}', [HotelManagementController::class,'division_destroy'])->name('admin.division.destroy');
+        });
+        
     });
    
     

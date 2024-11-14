@@ -60,6 +60,18 @@
                 <!-- Start::main-content -->
                 <div class="main-content">
                     <div class="box custom-box mt-2 mb-0">
+                        @if(session()->has('message'))
+                            <div class="alert alert-success bg-green-500 text-white p-4 rounded-md mb-4">
+                                {{ session('message') }}
+                            </div>
+                        @endif
+
+                        @if(session()->has('error'))
+                            <div class="alert alert-danger bg-red-500 text-white p-4 rounded-md mb-4">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+
                         @if(session('success'))
                         <div class="alert alert-success !border-success/10 flex items-center" role="alert" id="success-alert">
                             <svg class="sm:flex-shrink-0 me-2 fill-success" xmlns="http://www.w3.org/2000/svg"
@@ -120,7 +132,6 @@
                         @endif
                     </div>
                     @yield('content')
-                    
                 </div>
             </div>
             <!-- End::content  -->
