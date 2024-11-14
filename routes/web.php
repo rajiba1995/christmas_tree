@@ -70,6 +70,15 @@ Route::middleware('auth')->group(function () {
             // Route::get('/edit', [HotelManagementController::class,'division_edit'])->name('admin.division.edit');
             // Route::post('/update', [HotelManagementController::class,'division_update'])->name('admin.division.update');
             // Route::get('/destroy/{id}', [HotelManagementController::class,'division_destroy'])->name('admin.division.destroy');
+            
+        });
+        // Category Master
+        Route::prefix('category')->group(function(){
+            Route::get('/', [CommonController::class,'category_index'])->name('admin.category.index');
+            Route::post('/store', [CommonController::class,'category_store'])->name('admin.category.store');
+            Route::get('/edit', [CommonController::class,'category_edit'])->name('admin.category.edit');
+            Route::post('/update', [CommonController::class,'category_update'])->name('admin.category.update');
+            Route::get('/destroy/{id}', [CommonController::class,'category_destroy'])->name('admin.category.destroy');
         });
         
     });

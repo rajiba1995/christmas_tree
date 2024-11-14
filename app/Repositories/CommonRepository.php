@@ -6,6 +6,7 @@ use App\Models\City;
 use App\Models\State;
 use App\Models\Division;
 use App\Models\SeasionPlan;
+use App\Models\Category;
 use Illuminate\Support\Facades\DB;
 
 class CommonRepository
@@ -19,6 +20,16 @@ class CommonRepository
     {
         return City::where('status', 1)->get();
     }
+
+    public function createCity(array $data){
+        $division = new City;
+        $division->name = ucwords($data['name']);
+        $division->state_id = ucwords($data['state_id']);
+        $division->save();
+        return $division;
+    }
+
+
     public function deleteCity($id){
         $city = City::findOrFail($id);
         $city->delete();
@@ -60,18 +71,12 @@ class CommonRepository
         return Division::where('status', 1)->get();
     }
 
-    public function createDivision(array $data){
-        $division = new Division;
-        $division->name = ucwords($data['name']);
-        $division->save();
-        return $division;
-    }
+   
     public function deleteDivision($id){
         $division = Division::findOrFail($id);
         $division->delete();
         return $division;
     }
-
     // Hotel Seasion Plan
     public function getAllHotelSeasionPlan(int $perPage = 10){
         return SeasionPlan::orderBy('title', 'ASC')->paginate($perPage);
@@ -85,5 +90,26 @@ class CommonRepository
         return $sessionPlan;
     }
     
+     // Category
+     public function getAllCategory(int $perPage = 15)
+     {
+         return Category::orderBy('name', 'ASC')->paginate($perPage);
+     }
+     public function getAllActiveCategory()
+     {
+         return Category::where('status', 1)->get();
+     }
 
+     public function createCategory(array $data){
+        $category = new Category;
+        $category->name = ucwords($data['name']);
+        $category->save();
+        return $category;
+    }
+
+    public function deleteCategory($id){
+        $category = Category::findOrFail($id);
+        $category->delete();
+        return $category;
+    }
 }
