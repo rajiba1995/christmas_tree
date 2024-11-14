@@ -89,6 +89,14 @@ class CommonRepository
         $sessionPlan->save();
         return $sessionPlan;
     }
+    public function getHotelSeasionPlanById($id){
+        return SeasionPlan::where('id', $id)->first();
+    }
+    public function deleteSeasionPlan($id){
+        $sessionPlan = SeasionPlan::findOrFail($id);
+        $sessionPlan->delete();
+        return $sessionPlan;
+    }
     
      // Category
      public function getAllCategory(int $perPage = 15)
@@ -112,4 +120,5 @@ class CommonRepository
         $category->delete();
         return $category;
     }
+    
 }

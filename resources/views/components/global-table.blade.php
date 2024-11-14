@@ -176,11 +176,8 @@
                     </td>
                     <td scope="row" class="!p-1" width="10%">
                         <div>
-                            <a href="javascript:void(0);" class="ti-btn ti-btn-sm ti-btn-soft-info !border !border-info/20" onclick="ShowModal(event,{{$item->id}})">
-                                <i class="ti ti-pencil"></i>
-                            </a>
-                            <!-- Delete button that triggers confirmation -->
-                            @livewire('delete-item', ['itemId' => $item->id, 'action_type'=>'delete','model'=>'SeasionPlan'])
+                            <x-action-button type="edit" url="{{ route('admin.hotel_seasion_plan',['update_id'=>$item->id]) }}" itemId="{{ $item->id }}" />
+                            <x-action-button type="delete" url="{{ route('admin.hotel_seasion_plan_destroy', $item->id) }}" itemId="{{ $item->id }}" />
                         </div>
                     </td>
                 @else

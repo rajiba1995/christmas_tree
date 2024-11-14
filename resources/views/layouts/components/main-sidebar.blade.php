@@ -85,9 +85,9 @@
 									<li class="slide">
 										<a href="{{route('admin.division.index')}}" class="side-menu__item">Hotel Divisions</a>
 									</li>
-									<li class="slide">
+									{{-- <li class="slide">
 										<a href="{{route('admin.category.index')}}" class="side-menu__item">Hotel Categories</a>
-									</li>
+									</li> --}}
 									<li class="slide">
 										<a href="javascript:void(0);" class="side-menu__item">Hotel Amenities</a>
 									</li>
