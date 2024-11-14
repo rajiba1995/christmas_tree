@@ -80,7 +80,14 @@ Route::middleware('auth')->group(function () {
             Route::post('/update', [CommonController::class,'category_update'])->name('admin.category.update');
             Route::get('/destroy/{id}', [CommonController::class,'category_destroy'])->name('admin.category.destroy');
         });
-        
+        // Amenity Master
+        Route::prefix('amenity')->group(function(){
+            Route::get('/', [CommonController::class,'amenity_index'])->name('admin.amenity.index');
+            Route::post('/store', [CommonController::class,'amenity_store'])->name('admin.amenity.store');
+            Route::get('/edit', [CommonController::class,'amenity_edit'])->name('admin.amenity.edit');
+            Route::post('/update', [CommonController::class,'amenity_update'])->name('admin.amenity.update');
+            Route::get('/destroy/{id}', [CommonController::class,'amenity_destroy'])->name('admin.amenity.destroy');
+        });
     });
    
     
