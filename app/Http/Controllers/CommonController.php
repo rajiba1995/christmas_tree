@@ -123,10 +123,10 @@ class CommonController extends Controller
 
         public function amenity_store(Request $request){
             $validatedData = $request->validate([
-                'name' => 'required|string|max:255|unique:categories,name',
+                'name' => 'required|string|max:255|unique:amenities,name',
             ], [
-                'name.required' => 'Please enter category name.',
-                'name.unique' => 'This category name already exists.',
+                'name.required' => 'Please enter amenity name.',
+                'name.unique' => 'This amenity name already exists.',
             ]);
             try {
                 $this->commonRepository->createAmenity($validatedData);
