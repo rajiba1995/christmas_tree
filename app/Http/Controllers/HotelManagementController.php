@@ -19,9 +19,11 @@ class HotelManagementController extends Controller
         $this->commonRepository = $commonRepository;
     }
     public function hotel_seasion_plan(Request $request){
+        $update_id = $request->update_id ?? "";
+        $update_item = $this->commonRepository->getHotelSeasionPlanById($update_id);
         $data = $this->commonRepository->getAllHotelSeasionPlan(10);
         $common = CustomHelper::setHeadersAndTitle('Hotel Management', 'Seasion Plans');
-        return view('admin.seasion_plan.index', array_merge(compact('data'), $common));
+        return view('admin.seasion_plan.index', array_merge(compact('data','update_item'), $common));
     }
     public function hotel_seasion_plan_store(Request $request){
         // dd($request->all());
@@ -43,6 +45,14 @@ class HotelManagementController extends Controller
         try {
             $this->commonRepository->storeHotelSeasionPlan($validatedData);
             return redirect()->back()->with('success', 'Seasion created successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+    public function hotel_seasion_plan_destroy($id){
+        try {
+            $this->commonRepository->deleteSeasionPlan($id);
+            return redirect()->route('admin.hotel_seasion_plan')->with('success', 'Seasion plan deleted successfully.');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }

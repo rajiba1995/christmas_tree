@@ -71,7 +71,20 @@
                                 {{ session('error') }}
                             </div>
                         @endif
-
+                        @if(session()->has('message'))
+                            <div class="alert alert-success !border-success/10 flex items-center" role="alert" id="success-alert">
+                                <svg class="sm:flex-shrink-0 me-2 fill-success" xmlns="http://www.w3.org/2000/svg"
+                                    height="1.5rem" viewBox="0 0 24 24" width="1.5rem" fill="#000000">
+                                    <path d="M0 0h24v24H0V0zm0 0h24v24H0V0z" fill="none" />
+                                    <path
+                                        d="M16.59 7.58L10 14.17l-3.59-3.58L5 12l5 5 8-8zM12 2C6.48 2 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z" />
+                                </svg>
+                                <div>
+                                    {{ session('message') }}
+                                </div>
+                            </div>
+                        @endif
+                    
                         @if(session('success'))
                         <div class="alert alert-success !border-success/10 flex items-center" role="alert" id="success-alert">
                             <svg class="sm:flex-shrink-0 me-2 fill-success" xmlns="http://www.w3.org/2000/svg"
@@ -155,6 +168,8 @@
 
         <!-- APP JS-->
 		@vite('resources/js/app.js')       
+
+        
         <!-- END SCRIPTS -->
         @livewireScripts
     </body> 

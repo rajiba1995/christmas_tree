@@ -7,7 +7,8 @@ use App\Models\State;
 use App\Models\Division;
 use App\Models\SeasionPlan;
 use App\Models\Category;
-use App\Models\Amenity;
+use App\Models\Ammenity;
+
 
 use Illuminate\Support\Facades\DB;
 
@@ -91,6 +92,14 @@ class CommonRepository
         $sessionPlan->save();
         return $sessionPlan;
     }
+    public function getHotelSeasionPlanById($id){
+        return SeasionPlan::where('id', $id)->first();
+    }
+    public function deleteSeasionPlan($id){
+        $sessionPlan = SeasionPlan::findOrFail($id);
+        $sessionPlan->delete();
+        return $sessionPlan;
+    }
     
      // Category
      public function getAllCategory(int $perPage = 15)
@@ -115,26 +124,27 @@ class CommonRepository
         return $category;
     }
 
-    // Amenity
-    public function getAllAmenity(int $perPage = 15)
+    // Ammenity
+    public function getAllAmmenity(int $perPage = 15)
     {
-        return Amenity::orderBy('name', 'ASC')->paginate($perPage);
+        return Ammenity::orderBy('name', 'ASC')->paginate($perPage);
     }
-    public function getAllActiveAmenity()
+    public function getAllActiveAmmenity()
     {
-        return Amenity::where('status', 1)->get();
+        return Ammenity::where('status', 1)->get();
     }
 
-    public function createAmenity(array $data){
-       $amenity = new Amenity;
-       $amenity->name = ucwords($data['name']);
-       $amenity->save();
-       return $amenity;
+    public function createAmmenity(array $data){
+       $ammenity = new Ammenity;
+       $ammenity->name = ucwords($data['name']);
+       $ammenity->save();
+       return $ammenity;
    }
 
-   public function deleteAmenity($id){
-       $amenity = Amenity::findOrFail($id);
-       $amenity->delete();
-       return $amenity;
+   public function deleteAmmenity($id){
+       $ammenity =Ammenity::findOrFail($id);
+       $ammenity->delete();
+       return $ammenity;
    }
+    
 }
