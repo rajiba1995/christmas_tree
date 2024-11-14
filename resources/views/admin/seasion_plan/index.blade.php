@@ -38,7 +38,7 @@
     </div>
     <div class="xl:col-span-4 col-span-12">
         @if(isset($update_item))
-        <div class="box custom-box !bg-[rgb(240,231,231)]">
+        <div class="box custom-box bg-custom_card">
             <div class="box-header">
                 <h6 class="uppercase">New {{$childHeader}}</h6>
             </div>

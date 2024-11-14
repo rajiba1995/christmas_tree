@@ -6,10 +6,11 @@ const plugin = require("tailwindcss/plugin");
 module.exports = {
   darkMode: "class",
   content: [
-    "./resources/**/*.blade.php",
-    "./resources/**/*.css",
-    "./resources/**/*.scss",
-    "./resources/**/*.js",
+    './resources/**/*.blade.php',
+    './resources/**/*.js',
+    './resources/**/*.vue',
+    './resources/**/*.ts',
+    './resources/**/*.scss',
   ],
   theme: {
     screens: {
@@ -65,6 +66,7 @@ module.exports = {
           800: "#383853",
           900: "#323251",
         },
+        custom_card:'rgb(240, 231, 231)',
         bodybg:"rgb(var(--body-bg))",
         bodybg2:"rgb(var(--dark-bg))",
         primary: "rgb(var(--primary))",

@@ -7,6 +7,8 @@ use App\Models\State;
 use App\Models\Division;
 use App\Models\SeasionPlan;
 use App\Models\Category;
+use App\Models\Amenity;
+
 use Illuminate\Support\Facades\DB;
 
 class CommonRepository
@@ -120,5 +122,27 @@ class CommonRepository
         $category->delete();
         return $category;
     }
-    
+
+    // Amenity
+    public function getAllAmenity(int $perPage = 15)
+    {
+        return Amenity::orderBy('name', 'ASC')->paginate($perPage);
+    }
+    public function getAllActiveAmenity()
+    {
+        return Amenity::where('status', 1)->get();
+    }
+
+    public function createAmenity(array $data){
+       $amenity = new Amenity;
+       $amenity->name = ucwords($data['name']);
+       $amenity->save();
+       return $amenity;
+   }
+
+   public function deleteAmenity($id){
+       $amenity = Amenity::findOrFail($id);
+       $amenity->delete();
+       return $amenity;
+   }
 }

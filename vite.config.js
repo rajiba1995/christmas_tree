@@ -224,6 +224,11 @@ export default defineConfig({
             },
         }
     ],
+    server: {
+      hmr: {
+        host: 'localhost',  // Ensure this is set to localhost
+      },
+    },
     build: {
         chunkSizeWarningLimit: 1600,
         outDir: 'public/build',

@@ -120,4 +120,29 @@ class CommonController extends Controller
             $common = CustomHelper::setHeadersAndTitle('Hotel Management', 'Amenity');
             return view('admin.amenity.index', array_merge(compact('amenities'), $common));
         }
+
+        public function amenity_store(Request $request){
+            $validatedData = $request->validate([
+                'name' => 'required|string|max:255|unique:amenities,name',
+            ], [
+                'name.required' => 'Please enter amenity name.',
+                'name.unique' => 'This amenity name already exists.',
+            ]);
+            try {
+                $this->commonRepository->createAmenity($validatedData);
+                return redirect()->back()->with('success', 'Amenity created successfully.');
+            } catch (\Exception $e) {
+                return redirect()->back()->with('error', $e->getMessage());
+            }
+        }
+    
+        public function amenity_destroy($id){
+            try {
+                $this->commonRepository->deleteAmenity($id);
+                return redirect()->route('admin.amenity.index')->with('success', 'Amenity deleted successfully.');
+            } catch (\Exception $e) {
+                return redirect()->back()->with('error', $e->getMessage());
+            }
+        }
+    
 }
