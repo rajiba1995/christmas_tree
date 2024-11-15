@@ -23,7 +23,6 @@
     <div class="xl:col-span-8 col-span-12">
         <div class="box custom-box">
             <div class="box-body">
-                
                 <div class="table-responsive">
                     <x-global-table 
                         :items="$data" 
@@ -38,21 +37,21 @@
     </div>
     <div class="xl:col-span-4 col-span-12">
         @if(isset($update_item))
-        <div class="box custom-box bg-custom_card">
+        <div class="bg-custom_card">
             <div class="box-header">
-                <h6 class="uppercase">New {{$childHeader}}</h6>
+                <h6 class="uppercase text-black">Update {{$childHeader}}</h6>
             </div>
             <div class="box-body">
-                <form action="{{route('admin.hotel_seasion_plan_store')}}" method="post" id="create_plan">
+                <form action="{{route('admin.hotel_seasion_plan_update')}}" method="post" id="update_plan">
                     @csrf
                     <div class="xl:col-span-4 lf:col-span-6 md:col-span-6 sm:col-span-12 col-span-12">
                         <x-form-field 
-                            type="text" 
-                            name="title" 
-                            label="title" 
-                            :options="[]"
-                            :value="old('title')"
-                            />
+                        type="text" 
+                        name="title" 
+                        label="Title" 
+                        :options="[]" 
+                        :value="old('title', $update_item->title ?? '')"
+                    />                    
                         @error('title')
                             <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
@@ -84,6 +83,9 @@
                                 </div>
                             @endforeach
                         @else
+                            @php
+                                $value = explode(', ',$update_item->plan_item);
+                            @endphp
                             <div class="mt-4 grid grid-cols-12 gap-4">
                                 <!-- First plan_item input and Add More button -->
                                 <div class="col-span-10">
@@ -92,7 +94,7 @@
                                         name="plan_item[]" 
                                         label="Plan Item" 
                                         :options="[]" 
-                                        :value="old('plan_item.0')" 
+                                         :value="old('plan_item.0', $value[0] ?? '')"
                                     />
                                     @error('plan_item.*')
                                         <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -102,10 +104,27 @@
                                     <a href="javascript:void(0);" class="ti-btn ti-btn-secondary !py-1 !px-2 ti-btn-wave !mb-5"><i class="ri-add-circle-line add-more-btn"></i></a>
                                 </div>
                             </div>
+                            @foreach($value as $index => $item)
+                                @if($index > 0)
+                                <div class="grid grid-cols-12 gap-4 mt-3">
+                                    <div class="col-span-10">
+                                        <input type="text" name="plan_item[]" class="form-control form-control-sm" placeholder="Enter Plan Item" value="{{$item}}">
+                                        @error("plan_item.$index")
+                                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="col-span-2 flex items-end">
+                                        <a href="javascript:void(0);" class="ti-btn ti-btn-danger !py-1 !px-2 ti-btn-wave !mb-5"><i class="ri-delete-back-2-line remove-btn"></i></a>
+                                    </div>
+                                </div>
+                                @endif
+                            @endforeach
                         @endif
                     </div>
                     <div class="flex justify-end">
-                        <x-form-submit-button text="Submit" class="ti-btn ti-btn-primary-full !py-1 !px-2 ti-btn-wave me-[0.375rem]" />
+                        <x-input-field type="hidden" name="id" value="{{$update_item->id}}" />
+                        <a href="{{route('admin.hotel_seasion_plan')}}" class="ti-btn ti-btn-danger-full !py-1 !px-2 ti-btn-wave  me-[0.375rem]"><i class="fa-solid fa-caret-left"></i>Back</a>
+                        <x-form-submit-button text="Update" class="ti-btn ti-btn-primary-full !py-1 !px-2 ti-btn-wave me-[0.375rem]" />
                     </div>
                 </form>
             </div>

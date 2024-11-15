@@ -68,8 +68,7 @@ Route::middleware('auth')->group(function () {
         Route::prefix('hotel-seasion-plan')->group(function(){
             Route::get('/', [HotelManagementController::class,'hotel_seasion_plan'])->name('admin.hotel_seasion_plan');
             Route::post('/store', [HotelManagementController::class,'hotel_seasion_plan_store'])->name('admin.hotel_seasion_plan_store');
-            // Route::get('/edit', [HotelManagementController::class,'division_edit'])->name('admin.division.edit');
-            // Route::post('/update', [HotelManagementController::class,'division_update'])->name('admin.division.update');
+            Route::post('/update', [HotelManagementController::class,'hotel_seasion_plan_update'])->name('admin.hotel_seasion_plan_update');
             Route::get('/destroy/{id}', [HotelManagementController::class,'hotel_seasion_plan_destroy'])->name('admin.hotel_seasion_plan_destroy');
         });
 

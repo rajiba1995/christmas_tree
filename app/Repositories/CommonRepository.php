@@ -92,6 +92,14 @@ class CommonRepository
         $sessionPlan->save();
         return $sessionPlan;
     }
+
+    public function updateHotelSeasionPlan(array $data){
+        $sessionPlan  = SeasionPlan::findOrFail($data['id']);
+        $sessionPlan->title = $data['title'];
+        $sessionPlan->plan_item = implode(', ', array_map('strtoupper', $data['plan_item']));
+        $sessionPlan->save();
+        return $sessionPlan;
+    }
     public function getHotelSeasionPlanById($id){
         return SeasionPlan::where('id', $id)->first();
     }
@@ -146,7 +154,4 @@ class CommonRepository
        $ammenity->delete();
        return $ammenity;
    }
-=========
-    
->>>>>>>>> Temporary merge branch 2
 }

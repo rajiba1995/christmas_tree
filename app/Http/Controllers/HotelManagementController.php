@@ -26,7 +26,6 @@ class HotelManagementController extends Controller
         return view('admin.seasion_plan.index', array_merge(compact('data','update_item'), $common));
     }
     public function hotel_seasion_plan_store(Request $request){
-        // dd($request->all());
         $validatedData = $request->validate([
             'title' => [
                 'required',
@@ -45,6 +44,30 @@ class HotelManagementController extends Controller
         try {
             $this->commonRepository->storeHotelSeasionPlan($validatedData);
             return redirect()->back()->with('success', 'Seasion created successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+    public function hotel_seasion_plan_update(Request $request){
+        // dd($request->all());
+        $validatedData = $request->validate([
+            'title' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('seasion_plans', 'title')->ignore($request->id)->whereNull('deleted_at'),
+            ],
+            'plan_item' => 'required|array|min:1',
+            'plan_item.*' => 'required|string|max:255',
+        ], [
+            'title.required' => 'The title field is required.',
+            'plan_item.required' => 'At least one plan item is required.',
+            'plan_item.*.required' => 'This field is required.',
+        ]);
+          // After validation, proceed to save the data
+        try {
+            $this->commonRepository->updateHotelSeasionPlan($request->all());
+            return redirect()->back()->with('success', 'Seasion updated successfully.');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
