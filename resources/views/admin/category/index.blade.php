@@ -73,28 +73,6 @@
 @section('scripts')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-   window.confirmDelete = function(event, id) {
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#3085d6',
-            confirmButtonText: 'Yes, delete it!',
-            cancelButtonText: 'No, cancel!',
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = `/admin/category/destroy/${id}`;
-            } else {
-                Swal.fire(
-                    'Cancelled',
-                    'Your item is safe :)',
-                    'error'
-                );
-            }
-        });
-    };
 
     document.addEventListener('livewire:load', function () {
         Livewire.on('recordUpdated', () => {

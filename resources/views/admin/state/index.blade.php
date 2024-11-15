@@ -42,7 +42,7 @@
     <div class="xl:col-span-4 col-span-12">
         <div class="box custom-box">
             <div class="box-header">
-                <h6 class="uppercase">{{$childHeader}}</h6>
+                <h6 class="uppercase">New Destination</h6>
             </div>
             <div class="box-body">
                 <form action="{{route('admin.state.store')}}" method="post">
@@ -72,36 +72,6 @@
 
 @section('scripts')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-   window.confirmDelete = function(event, id) {
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#3085d6',
-            confirmButtonText: 'Yes, delete it!',
-            cancelButtonText: 'No, cancel!',
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = `/admin/state/destroy/${id}`;
-            } else {
-                Swal.fire(
-                    'Cancelled',
-                    'Your item is safe :)',
-                    'error'
-                );
-            }
-        });
-    };
 
-    document.addEventListener('livewire:load', function () {
-        Livewire.on('recordUpdated', () => {
-            window.dispatchEvent(new CustomEvent('close-update-modal'));
-            alert('Record updated successfully!');
-        });
-    });
-</script>
 @endsection
 

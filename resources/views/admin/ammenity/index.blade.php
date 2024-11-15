@@ -18,7 +18,7 @@
         </nav>
     </div>
     {{-- <div class="ti-btn-list">
-        <a href="{{route('admin.amenity.index')}}" class="ti-btn ti-btn-danger-full !py-1 !px-2 ti-btn-wave  me-[0.375rem]"><i class="fa-solid fa-caret-left"></i>Back</a>
+        <a href="{{route('admin.ammenity.index')}}" class="ti-btn ti-btn-danger-full !py-1 !px-2 ti-btn-wave  me-[0.375rem]"><i class="fa-solid fa-caret-left"></i>Back</a>
     </div> --}}
 </div>
     <!-- Start:: row-10 -->
@@ -29,12 +29,12 @@
                 
                 <div class="table-responsive">
                     <x-global-table 
-                        :items="$amenities" 
-                        :fields="['amenity_name', 'status']" 
-                        dataType="categories" 
+                        :items="$ammenities" 
+                        :fields="['ammenity_name', 'status']" 
+                        dataType="ammenities" 
                         :extra="[]"
                     />
-                    {{ $amenities->links() }}
+                    {{ $ammenities->links() }}
                 </div>
             </div>
         </div>
@@ -45,7 +45,7 @@
                 <h6 class="uppercase">{{$childHeader}}</h6>
             </div>
             <div class="box-body">
-                <form action="{{route('admin.amenity.store')}}" method="post">
+                <form action="{{route('admin.ammenity.store')}}" method="post">
                     @csrf
                     <div class="xl:col-span-4 lf:col-span-6 md:col-span-6 sm:col-span-12 col-span-12">
                         <x-form-field 
@@ -73,28 +73,7 @@
 @section('scripts')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-   window.confirmDelete = function(event, id) {
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#3085d6',
-            confirmButtonText: 'Yes, delete it!',
-            cancelButtonText: 'No, cancel!',
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = `/admin/amenity/destroy/${id}`;
-            } else {
-                Swal.fire(
-                    'Cancelled',
-                    'Your item is safe :)',
-                    'error'
-                );
-            }
-        });
-    };
+  
 
     document.addEventListener('livewire:load', function () {
         Livewire.on('recordUpdated', () => {

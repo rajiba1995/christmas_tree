@@ -114,32 +114,32 @@ class CommonController extends Controller
         }
     }
 
-        // Amenity Master
-        public function amenity_index(){
-            $amenities = $this->commonRepository->getAllAmenity(10);
-            $common = CustomHelper::setHeadersAndTitle('Hotel Management', 'Amenity');
-            return view('admin.amenity.index', array_merge(compact('amenities'), $common));
+        // Ammenity Master
+        public function ammenity_index(){
+            $ammenities = $this->commonRepository->getAllAmmenity(10);
+            $common = CustomHelper::setHeadersAndTitle('Hotel Management', 'Ammenity');
+            return view('admin.ammenity.index', array_merge(compact('ammenities'), $common));
         }
 
-        public function amenity_store(Request $request){
+        public function ammenity_store(Request $request){
             $validatedData = $request->validate([
-                'name' => 'required|string|max:255|unique:amenities,name',
+                'name' => 'required|string|max:255|unique:ammenities,name',
             ], [
-                'name.required' => 'Please enter amenity name.',
-                'name.unique' => 'This amenity name already exists.',
+                'name.required' => 'Please enter ammenity name.',
+                'name.unique' => 'This ammenity name already exists.',
             ]);
             try {
-                $this->commonRepository->createAmenity($validatedData);
-                return redirect()->back()->with('success', 'Amenity created successfully.');
+                $this->commonRepository->createAmmenity($validatedData);
+                return redirect()->back()->with('success', 'Ammenity created successfully.');
             } catch (\Exception $e) {
                 return redirect()->back()->with('error', $e->getMessage());
             }
         }
     
-        public function amenity_destroy($id){
+        public function ammenity_destroy($id){
             try {
-                $this->commonRepository->deleteAmenity($id);
-                return redirect()->route('admin.amenity.index')->with('success', 'Amenity deleted successfully.');
+                $this->commonRepository->deleteAmmenity($id);
+                return redirect()->route('admin.ammenity.index')->with('success', 'Ammenity deleted successfully.');
             } catch (\Exception $e) {
                 return redirect()->back()->with('error', $e->getMessage());
             }

@@ -85,11 +85,11 @@
 									<li class="slide">
 										<a href="{{route('admin.division.index')}}" class="side-menu__item">Hotel Divisions</a>
 									</li>
-									{{-- <li class="slide">
-										<a href="{{route('admin.category.index')}}" class="side-menu__item">Hotel Categories</a>
-									</li> --}}
 									<li class="slide">
-										<a href="{{route('admin.amenity.index')}}" class="side-menu__item">Hotel Amenities</a>
+										<a href="{{route('admin.category.index')}}" class="side-menu__item">Hotel Categories</a>
+									</li> 
+									<li class="slide">
+										<a href="{{route('admin.ammenity.index')}}" class="side-menu__item">Hotel Ammenity</a>
 									</li>
 									<li class="slide">
 										<a href="javascript:void(0);" class="side-menu__item">Hotel Meal Plans</a>
