@@ -21,7 +21,7 @@
                 
                 <x-input-field type="hidden" name="id" value="{{$id}}" />
                 <div class="flex justify-end items-center gap-x-2 py-3 px-4 border-t border-defaultborder dark:border-defaultborder/10">
-                    <x-form-submit-button text="Save Changes" class="ti-btn ti-btn-primary-full !py-1 !px-2 ti-btn-wave me-[0.375rem]" />
+                    <x-form-submit-button text="Save Changes" class="change-text-button ti-btn ti-btn-primary-full !py-1 !px-2 ti-btn-wave me-[0.375rem]" />
                 </div>
             </form>
         </div>

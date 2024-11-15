@@ -163,6 +163,25 @@
                         </div>
                     </td>
                 </tr>
+            @elseif($dataType==='hotel')
+                <tr class="text-grey" id="delete{{$item->id}}">
+                    <td scope="row" class="text-start !p-1">{{ $index + 1 }}</td>
+                    <td scope="row" class="!p-1"></td>
+                    <td scope="row" class="!p-1"></td>
+                    <td scope="row" class="!p-1">
+                        <livewire:master-status-toggle 
+                            modelName="Hotel" 
+                            :item="$item" 
+                            wire:key="status-toggle-{{ $item->id }}" 
+                        />
+                    </td>
+                    <td scope="row" class="!p-1" width="10%">
+                        <div>
+                            <x-action-button type="edit" url="{{ route('admin.division.edit',['update_id'=>$item->id]) }}" itemId="{{ $item->id }}" />
+                            <x-action-button type="delete" url="{{ route('admin.division.destroy', $item->id) }}" itemId="{{ $item->id }}" />
+                        </div>
+                    </td>
+                </tr>
             @else
             @endif
         @endforeach

@@ -16,6 +16,7 @@
     @elseif($type === 'select')
         <select name="{{ $name }}" id="{{ $name }}"
                 {{ $attributes->merge(['class' => 'form-select w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500']) }}>
+                <option value="" selected>Select {{strtolower($label)}}..</option>
             @foreach($options as $optionValue => $optionLabel)
                 <option value="{{ $optionValue }}" {{ $optionValue == old($name, $value) ? 'selected' : '' }}>
                     {{ $optionLabel }}

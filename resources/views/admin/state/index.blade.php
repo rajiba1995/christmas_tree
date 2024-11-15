@@ -59,7 +59,7 @@
                             <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
                         <div class="flex justify-end">
-                            <x-form-submit-button text="Submit" class="ti-btn ti-btn-primary-full !py-1 !px-2 ti-btn-wave me-[0.375rem]" />
+                            <x-form-submit-button text="Submit" class="change-text-button ti-btn ti-btn-primary-full !py-1 !px-2 ti-btn-wave me-[0.375rem]" />
                         </div>
                     </div>
                 </form>

@@ -47,47 +47,57 @@ Route::middleware('auth')->group(function () {
             // Additional CRUD routes
         });
 
-         // State Master
-        Route::prefix('hotel-destination')->group(function(){
-            Route::get('/', [CommonController::class,'state_index'])->name('admin.state.index');
-            Route::post('/store', [CommonController::class,'state_store'])->name('admin.state.store');
-            Route::get('/edit', [CommonController::class,'state_edit'])->name('admin.state.edit');
-            Route::post('/update', [CommonController::class,'state_update'])->name('admin.state.update');
-            Route::get('/destroy/{id}', [CommonController::class,'state_destroy'])->name('admin.state.destroy');
-        });
+        
+        // Hotel master
+        Route::prefix('hotel')->group(function(){
+            Route::get('/', [HotelManagementController::class,'index'])->name('admin.hotel.index');
+            // Route::post('/store', [HotelManagementController::class,'hotel_seasion_plan_store'])->name('admin.hotel_seasion_plan_store');
+            // Route::post('/update', [HotelManagementController::class,'hotel_seasion_plan_update'])->name('admin.hotel_seasion_plan_update');
+            // Route::get('/destroy/{id}', [HotelManagementController::class,'hotel_seasion_plan_destroy'])->name('admin.hotel_seasion_plan_destroy');
 
-        // Division Master
-        Route::prefix('hotel-division')->group(function(){
-            Route::get('/', [CommonController::class,'division_index'])->name('admin.division.index');
-            Route::post('/store', [CommonController::class,'division_store'])->name('admin.division.store');
-            Route::get('/edit', [CommonController::class,'division_edit'])->name('admin.division.edit');
-            Route::post('/update', [CommonController::class,'division_update'])->name('admin.division.update');
-            Route::get('/destroy/{id}', [CommonController::class,'division_destroy'])->name('admin.division.destroy');
-        });
-        // Hotel Seasion Plan  Master
-        Route::prefix('hotel-seasion-plan')->group(function(){
-            Route::get('/', [HotelManagementController::class,'hotel_seasion_plan'])->name('admin.hotel_seasion_plan');
-            Route::post('/store', [HotelManagementController::class,'hotel_seasion_plan_store'])->name('admin.hotel_seasion_plan_store');
-            Route::post('/update', [HotelManagementController::class,'hotel_seasion_plan_update'])->name('admin.hotel_seasion_plan_update');
-            Route::get('/destroy/{id}', [HotelManagementController::class,'hotel_seasion_plan_destroy'])->name('admin.hotel_seasion_plan_destroy');
-        });
+            // State Master
+            Route::prefix('destination')->group(function(){
+                Route::get('/', [CommonController::class,'state_index'])->name('admin.state.index');
+                Route::post('/store', [CommonController::class,'state_store'])->name('admin.state.store');
+                Route::get('/edit', [CommonController::class,'state_edit'])->name('admin.state.edit');
+                Route::post('/update', [CommonController::class,'state_update'])->name('admin.state.update');
+                Route::get('/destroy/{id}', [CommonController::class,'state_destroy'])->name('admin.state.destroy');
+            });
 
-         // Category Master
-         Route::prefix('hotel-category')->group(function(){
-            Route::get('/', [CommonController::class,'category_index'])->name('admin.category.index');
-            Route::post('/store', [CommonController::class,'category_store'])->name('admin.category.store');
-            Route::get('/edit', [CommonController::class,'category_edit'])->name('admin.category.edit');
-            Route::post('/update', [CommonController::class,'category_update'])->name('admin.category.update');
-            Route::get('/destroy/{id}', [CommonController::class,'category_destroy'])->name('admin.category.destroy');
+            // Division Master
+            Route::prefix('division')->group(function(){
+                Route::get('/', [CommonController::class,'division_index'])->name('admin.division.index');
+                Route::post('/store', [CommonController::class,'division_store'])->name('admin.division.store');
+                Route::get('/edit', [CommonController::class,'division_edit'])->name('admin.division.edit');
+                Route::post('/update', [CommonController::class,'division_update'])->name('admin.division.update');
+                Route::get('/destroy/{id}', [CommonController::class,'division_destroy'])->name('admin.division.destroy');
+            });
+            // Hotel Seasion Plan  Master
+            Route::prefix('seasion-plan')->group(function(){
+                Route::get('/', [HotelManagementController::class,'hotel_seasion_plan'])->name('admin.hotel_seasion_plan');
+                Route::post('/store', [HotelManagementController::class,'hotel_seasion_plan_store'])->name('admin.hotel_seasion_plan_store');
+                Route::post('/update', [HotelManagementController::class,'hotel_seasion_plan_update'])->name('admin.hotel_seasion_plan_update');
+                Route::get('/destroy/{id}', [HotelManagementController::class,'hotel_seasion_plan_destroy'])->name('admin.hotel_seasion_plan_destroy');
+            });
+
+            // Category Master
+            Route::prefix('category')->group(function(){
+                Route::get('/', [CommonController::class,'category_index'])->name('admin.category.index');
+                Route::post('/store', [CommonController::class,'category_store'])->name('admin.category.store');
+                Route::get('/edit', [CommonController::class,'category_edit'])->name('admin.category.edit');
+                Route::post('/update', [CommonController::class,'category_update'])->name('admin.category.update');
+                Route::get('/destroy/{id}', [CommonController::class,'category_destroy'])->name('admin.category.destroy');
+            });
+            // Ammenity Master
+            Route::prefix('ammenity')->group(function(){
+                Route::get('/', [CommonController::class,'ammenity_index'])->name('admin.ammenity.index');
+                Route::post('/store', [CommonController::class,'ammenity_store'])->name('admin.ammenity.store');
+                Route::get('/edit', [CommonController::class,'ammenity_edit'])->name('admin.ammenity.edit');
+                Route::post('/update', [CommonController::class,'ammenity_update'])->name('admin.ammenity.update');
+                Route::get('/destroy/{id}', [CommonController::class,'ammenity_destroy'])->name('admin.ammenity.destroy');
+            });
         });
-        // Ammenity Master
-        Route::prefix('hotel-ammenity')->group(function(){
-            Route::get('/', [CommonController::class,'ammenity_index'])->name('admin.ammenity.index');
-            Route::post('/store', [CommonController::class,'ammenity_store'])->name('admin.ammenity.store');
-            Route::get('/edit', [CommonController::class,'ammenity_edit'])->name('admin.ammenity.edit');
-            Route::post('/update', [CommonController::class,'ammenity_update'])->name('admin.ammenity.update');
-            Route::get('/destroy/{id}', [CommonController::class,'ammenity_destroy'])->name('admin.ammenity.destroy');
-        });
+        
 
        
     });

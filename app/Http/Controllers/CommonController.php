@@ -17,7 +17,8 @@ class CommonController extends Controller
     }
     // State Master
     public function state_index(){
-        $states = $this->commonRepository->getAllState(10);
+        $get_destinations = $this->commonRepository->getAllState(10);
+        $states = $get_destinations['states'];  // Paginated data
         $common = CustomHelper::setHeadersAndTitle('Hotel Management', 'Destinations(States)');
         return view('admin.state.index', array_merge(compact('states'), $common));
     }
@@ -51,9 +52,13 @@ class CommonController extends Controller
     }
 
     // Division Master
-    public function division_index(){
-        $divisions = $this->commonRepository->getAllCity(10);
-        $destinations = $this->commonRepository->getAllState();
+    public function division_index(Request $request){
+        $dev = $request->division??"";
+        $des = $request->destination??"";
+        $divisions = $this->commonRepository->getAllCity(10, $dev, $des);
+        $get_destinations = $this->commonRepository->getAllState();
+        // Access the paginated data and total records count
+        $destinations = $get_destinations['totalRecords'];
         $common = CustomHelper::setHeadersAndTitle('Hotel Management', 'Division(City)');
         return view('admin.division.index', array_merge(compact('divisions','destinations'), $common));
     }

@@ -72,12 +72,12 @@
 									<span class="side-menu__label">Hotel Management</span>
 									<i class="fe fe-chevron-right side-menu__angle"></i>
 								</a>
-								<ul class="slide-menu child1 {{ request()->is('admin/leads*') ? 'active' : '' }}">
+								<ul class="slide-menu child1 {{ request()->is('admin/hotel*') ? 'active' : '' }}">
 									<li class="slide side-menu__label1">
 										<a href="javascript:void(0);">Menu Levels</a>
 									</li>
-									<li class="slide {{ request()->is('admin/leads*')? 'active' : '' }}">
-										<a href="{{route('admin.leads.index')}}" class="side-menu__item">Hotels</a>
+									<li class="slide {{ request()->is('admin/hotel*')? 'active' : '' }}">
+										<a href="{{route('admin.hotel.index')}}" class="side-menu__item">Hotels</a>
 									</li>
 									<li class="slide">
 										<a href="{{route('admin.state.index')}}" class="side-menu__item">Hotel Destinations</a>

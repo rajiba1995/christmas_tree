@@ -15,10 +15,24 @@ use Illuminate\Support\Facades\DB;
 class CommonRepository
 {
     // City
-    public function getAllCity($perPage)
+    public function getAllCity($limit = 10, $division = '', $destination = '')
     {
-        return City::orderBy('name', 'ASC')->paginate($perPage);
+        $query = City::orderBy('name', 'ASC');  // Start by ordering the cities
+        // dd($division);
+        // Apply division filter if provided
+        if (!empty($division)) {
+            $query->where('name', 'like', "%{$division}%");
+        }
+
+        // Apply destination filter if provided
+        if (!empty($destination)) {
+            $query->where('state_id', $destination);
+        }
+
+        // Paginate the results
+        return $query->paginate($limit);  // $limit is the number of results per page
     }
+
     public function getAllActiveCity()
     {
         return City::where('status', 1)->get();
@@ -45,7 +59,17 @@ class CommonRepository
     // State
     public function getAllState(int $perPage = 15)
     {
-        return State::orderBy('name', 'ASC')->paginate($perPage);
+        // Get paginated data
+        $paginatedStates = State::orderBy('name', 'ASC')->paginate($perPage);
+
+        // Get the total number of records (excluding pagination)
+        $totalRecords = State::orderBy('name', 'ASC')->get(); 
+
+        // Return both the paginated results and the total record count
+        return [
+            'states' => $paginatedStates,  // Paginated states
+            'totalRecords' => $totalRecords,  // Total records count
+        ];
     }
     public function getAllActiveState()
     {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Repositories\CommonRepository;
+use App\Repositories\HotelRepository;
 use App\Repositories\LeadRepository;
 use App\Helpers\CustomHelper;
 use Illuminate\Validation\Rule;
@@ -12,12 +13,32 @@ class HotelManagementController extends Controller
 {
     protected $leadRepository;
     protected $commonRepository;
+    protected $hotelRepository;
 
-    public function __construct(LeadRepository $leadRepository, CommonRepository $commonRepository)
+    public function __construct(LeadRepository $leadRepository, CommonRepository $commonRepository, HotelRepository $hotelRepository)
     {
         $this->leadRepository = $leadRepository;
         $this->commonRepository = $commonRepository;
+        $this->hotelRepository = $hotelRepository;
     }
+    // Hotel Master
+    public function index(Request $request){
+        // $update_id = $request->update_id ?? "";
+        $data = [];
+
+        // Get active destinations using a repository method
+        $data['destinations'] = $this->commonRepository->getAllActiveState();
+        $data['divisions'] = $this->commonRepository->getAllActiveCity();
+        $data['hotel_categories'] = $this->commonRepository->getAllActiveCategory();
+
+        // Fetch paginated hotel data from the hotel repository
+        $get_data = $this->hotelRepository->getAllHotel(10);
+        $data['hotels']= $get_data['hotel'];  // Paginated data
+        $common = CustomHelper::setHeadersAndTitle('Hotel Management', 'Hotels');
+        return view('admin.hotel.index', array_merge(compact('data'), $common));
+    }
+
+    // Hotel Seasion Plan
     public function hotel_seasion_plan(Request $request){
         $update_id = $request->update_id ?? "";
         $update_item = $this->commonRepository->getHotelSeasionPlanById($update_id);

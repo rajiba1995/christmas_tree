@@ -119,7 +119,7 @@
                     <div class="flex justify-end">
                         <x-input-field type="hidden" name="id" value="{{$update_item->id}}" />
                         <a href="{{route('admin.hotel_seasion_plan')}}" class="ti-btn ti-btn-danger-full !py-1 !px-2 ti-btn-wave  me-[0.375rem]"><i class="fa-solid fa-caret-left"></i>Back</a>
-                        <x-form-submit-button text="Update" class="ti-btn ti-btn-primary-full !py-1 !px-2 ti-btn-wave me-[0.375rem]" />
+                        <x-form-submit-button text="Update" class="change-text-button ti-btn ti-btn-primary-full !py-1 !px-2 ti-btn-wave me-[0.375rem]" />
                     </div>
                 </form>
             </div>
@@ -192,7 +192,7 @@
                             @endif
                         </div>
                         <div class="flex justify-end">
-                            <x-form-submit-button text="Submit" class="ti-btn ti-btn-primary-full !py-1 !px-2 ti-btn-wave me-[0.375rem]" />
+                            <x-form-submit-button text="Submit" class="change-text-button ti-btn ti-btn-primary-full !py-1 !px-2 ti-btn-wave me-[0.375rem]" />
                         </div>
                     </form>
                 </div>
