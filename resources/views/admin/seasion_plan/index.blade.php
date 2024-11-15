@@ -1,5 +1,6 @@
 @extends('layouts.master')
 @section('styles')
+<link rel="stylesheet" href="{{ asset('build/assets/libs/dragula/dragula.min.css') }}">
 @endsection
 @section('title', $pageTitle) <!-- This sets the page title dynamically -->
 @section('content')
@@ -24,13 +25,7 @@
         <div class="box custom-box">
             <div class="box-body">
                 <div class="table-responsive">
-                    <x-global-table 
-                        :items="$data" 
-                        :fields="['title', 'Plan_items', 'status']" 
-                        dataType="hotel_seasion_plan" 
-                        :extra="[]"
-                    />
-                    {{ $data->links() }}
+                    <livewire:seasion-plan-table :seasionPlans="$data" />
                 </div>
             </div>
         </div>
@@ -236,6 +231,27 @@
             if (event.target && event.target.classList.contains('remove-btn')) {
                 event.target.closest('.grid').remove();
             }
+        });
+    });
+</script>
+<!-- Make sure this script is loaded after Livewire Scripts -->
+
+<script>
+    console.log(typeof Livewire.emit);
+    document.addEventListener('DOMContentLoaded', function () {
+        const el = document.getElementById('sortable-body');
+        if (!el) return;  // Prevent reinitialization
+
+        const drake = dragula([el]);
+
+        drake.on('drop', function (el, target, source, sibling) {
+            const order = Array.from(target.rows).map(row => row.dataset.id);
+            // Ensure Livewire is available before calling emit
+            // if (typeof Livewire.emit === 'function') {
+                // Livewire.emit('updateOrder', order);
+            // } else {
+            //     console.error('Livewire.emit is not available.');
+            // }
         });
     });
 </script>

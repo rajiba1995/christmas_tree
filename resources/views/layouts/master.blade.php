@@ -23,6 +23,7 @@
       
         <!-- APP CSS & APP SCSS -->
         @vite(['resources/sass/app.scss' ])
+        
 
         @include('layouts.components.styles')
         @yield('styles')
@@ -157,8 +158,7 @@
 
         </div>
 
-        <!-- SCRIPTS -->
-        @include('layouts.components.scripts')
+      
 
         <!-- Sticky JS -->
         <script src="{{asset('build/assets/sticky.js')}}"></script>
@@ -172,6 +172,8 @@
         
         <!-- END SCRIPTS -->
         @livewireScripts
+        <!-- SCRIPTS -->
+        @include('layouts.components.scripts')
     </body> 
 
 </html>

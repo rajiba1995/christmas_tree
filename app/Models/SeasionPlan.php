@@ -13,6 +13,7 @@ class SeasionPlan extends Model
     protected $fillable = [
         'id',
         'title',
+        'position',
         'status',
     ];
 }

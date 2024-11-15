@@ -20,6 +20,7 @@
 
          <!-- Preline JS -->
          <script src="{{asset('build/assets/libs/preline/preline.js')}}"></script>
+         <script src="{{ asset('build/assets/libs/dragula/dragula.min.js') }}"></script>
 
          @yield('scripts')    
          <script>

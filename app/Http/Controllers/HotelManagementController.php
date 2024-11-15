@@ -21,7 +21,7 @@ class HotelManagementController extends Controller
     public function hotel_seasion_plan(Request $request){
         $update_id = $request->update_id ?? "";
         $update_item = $this->commonRepository->getHotelSeasionPlanById($update_id);
-        $data = $this->commonRepository->getAllHotelSeasionPlan(10);
+        $data = $this->commonRepository->getAllHotelSeasionPlan();
         $common = CustomHelper::setHeadersAndTitle('Hotel Management', 'Seasion Plans');
         return view('admin.seasion_plan.index', array_merge(compact('data','update_item'), $common));
     }

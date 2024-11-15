@@ -81,8 +81,8 @@ class CommonRepository
         return $division;
     }
     // Hotel Seasion Plan
-    public function getAllHotelSeasionPlan(int $perPage = 10){
-        return SeasionPlan::orderBy('title', 'ASC')->paginate($perPage);
+    public function getAllHotelSeasionPlan(){
+        return SeasionPlan::orderBy('title', 'ASC')->get();
     }
     
     public function storeHotelSeasionPlan(array $data){
